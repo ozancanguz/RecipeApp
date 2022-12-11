@@ -1,9 +1,11 @@
 package com.ozancanguz.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+
 import androidx.recyclerview.widget.RecyclerView
 import com.ozancanguz.recipeapp.R
 import com.ozancanguz.recipeapp.data.models.FoodRecipe
@@ -31,6 +33,7 @@ class RecipeAdapter:RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
         return RecipeViewHolder(view)
     }
 
+
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
 
         var currentItem=recipeList[position]
@@ -42,7 +45,11 @@ class RecipeAdapter:RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
         holder.itemView.recipe_imageView.loadImage(currentItem.image)
         holder.itemView.heart_textView.text=currentItem.aggregateLikes.toString()
         holder.itemView.clock_textView.text=currentItem.readyInMinutes.toString()
-        holder.itemView.leaf_imageView.setColorFilter(R.color.green)
+        holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context
+            ,R.color.customColor))
+        holder.itemView.leaf_imageView
+            .setBackgroundColor(ContextCompat.getColor(holder.itemView.context
+            ,R.color.customColor))
 
     }
 
