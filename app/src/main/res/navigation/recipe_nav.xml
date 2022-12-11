@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recipe_nav"
+    app:startDestination="@id/recipeFragment">
+
+    <fragment
+        android:id="@+id/recipeFragment"
+        android:name="com.ozancanguz.recipeapp.ui.fragments.recipe.RecipeFragment"
+        android:label="Recipes"
+        tools:layout="@layout/fragment_recipe" >
+        <action
+            android:id="@+id/action_recipeFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_recipeFragment_to_foodJokeFragment"
+            app:destination="@id/foodJokeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodJokeFragment"
+        android:name="com.ozancanguz.recipeapp.ui.fragments.foodjoke.FoodJokeFragment"
+        android:label="FoodJoke"
+        tools:layout="@layout/fragment_food_joke" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.ozancanguz.recipeapp.ui.fragments.favorite.FavoriteFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorite" />
+</navigation>
