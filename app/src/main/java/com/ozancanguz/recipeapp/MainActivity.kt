@@ -7,7 +7,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -25,13 +24,13 @@ class MainActivity : AppCompatActivity() {
 
         navController = findNavController(R.id.navHostFragment)
         val appBarConfiguration = AppBarConfiguration(
-
             setOf(
                 R.id.recipesFragment,
                 R.id.favoriteRecipes,
                 R.id.foodJokeFragment
             )
         )
+
         bottomNavigationView.setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
@@ -40,9 +39,4 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
-
-
-
-
 }

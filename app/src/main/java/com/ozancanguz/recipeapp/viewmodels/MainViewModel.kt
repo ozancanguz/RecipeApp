@@ -10,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import com.ozancanguz.recipeapp.data.Repository
 import com.ozancanguz.recipeapp.data.models.FoodRecipe
 import com.ozancanguz.recipeapp.utils.NetworkResult
+import dagger.hilt.android.internal.Contexts
+import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -26,7 +28,7 @@ class MainViewModel @Inject constructor(
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
 
     fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
-         getRecipesSafeCall(queries)
+
     }
 
     private suspend fun getRecipesSafeCall(queries: Map<String, String>) {

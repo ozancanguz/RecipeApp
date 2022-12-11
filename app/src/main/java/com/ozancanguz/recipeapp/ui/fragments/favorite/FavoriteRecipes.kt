@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.ozancanguz.recipeapp.R
 import com.ozancanguz.recipeapp.databinding.FragmentFoodJokeBinding
 
 
@@ -18,7 +19,6 @@ class FavoriteRecipes : Fragment() {
     ): View? {
         _binding = FragmentFoodJokeBinding.inflate(inflater, container, false)
         val view = binding.root
-
 
 
 
