@@ -11,10 +11,7 @@
         android:label="Recipes"
         tools:layout="@layout/fragment_recipes" >
         <action
-            android:id="@+id/action_recipeFragment_to_favoriteFragment"
-            app:destination="@id/favoriteRecipes" />
-        <action
-            android:id="@+id/action_recipeFragment_to_foodJokeFragment"
+            android:id="@+id/action_recipesFragment_to_foodJokeFragment"
             app:destination="@id/foodJokeFragment" />
     </fragment>
     <fragment
