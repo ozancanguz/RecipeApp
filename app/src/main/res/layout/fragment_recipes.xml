@@ -40,7 +40,7 @@
         android:layout_height="100dp"
         android:alpha="0.5"
         android:src="@drawable/ic_baseline_error_24"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
         android:text="No Internet Connection."
         android:textSize="18sp"
         android:textStyle="bold"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/error_imageView"
         app:layout_constraintStart_toStartOf="@+id/error_imageView"
         app:layout_constraintTop_toBottomOf="@+id/error_imageView" />
