@@ -1,6 +1,7 @@
 package com.ozancanguz.recipeapp.ui.fragments.recipe
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ozancanguz.adapter.RecipeAdapter
@@ -27,6 +29,7 @@ import com.ozancanguz.recipeapp.viewmodels.MainViewModel
 import com.ozancanguz.recipeapp.viewmodels.RecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -53,19 +56,38 @@ class RecipesFragment : Fragment() {
         initRv()
 
         // observe data and update ui
-        observeLiveData()
+       // observeLiveData()
+        // for observelivedata fun we read from database
+        readDatabase()
 
 
 
     return view
     }
-
     private fun initRv() {
         binding.recyclerview.layoutManager=LinearLayoutManager(requireContext())
         binding.recyclerview.adapter=recipeAdapter
     }
 
+    // firs we listed from database if database is not empty .
+    //if database is empty we request data from api
+    private fun readDatabase() {
+        lifecycleScope.launch {
+            mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
+                if (database.isNotEmpty()) {
+                    Log.d("RecipesFragment", "readDatabase called!")
+                    recipeAdapter.updateData(database[0].foodRecipe)
+
+                } else {
+                    observeLiveData() // request api data
+                }
+            }
+        }
+    }
+
+
     // observe data and update ui
+    // means request api data
     private fun observeLiveData() {
 
         // apply queries
@@ -79,6 +101,7 @@ class RecipesFragment : Fragment() {
                     response.data?.let { recipeAdapter.updateData(it) }
                 }
                 is NetworkResult.Error -> {
+                    loadDataFromCache() // if there is no internet load from cache to user
 
                     Toast.makeText(
                         requireContext(),
@@ -91,9 +114,22 @@ class RecipesFragment : Fragment() {
                 }
             }
         }
-
-
     }
+
+    // if there is no internet load from database firs
+    private fun loadDataFromCache() {
+        lifecycleScope.launch {
+            mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
+                if (database.isNotEmpty()) {
+                    recipeAdapter.updateData(database[0].foodRecipe)
+                }
+            }
+        }
+    }
+
+
+
+
 
 
 
