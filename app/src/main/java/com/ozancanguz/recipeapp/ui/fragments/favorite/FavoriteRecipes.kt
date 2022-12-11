@@ -1,22 +1,28 @@
 package com.ozancanguz.recipeapp.ui.fragments.favorite
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.ozancanguz.recipeapp.R
+import com.ozancanguz.recipeapp.databinding.FragmentFoodJokeBinding
 
 
 class FavoriteRecipes : Fragment() {
-
+    private var _binding: FragmentFoodJokeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite_recipes, container, false)
+        _binding = FragmentFoodJokeBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+
+
+        return view
     }
 
 

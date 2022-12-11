@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 //API Key: 97dd239ca98e45d38e09b1982f6552c6
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
