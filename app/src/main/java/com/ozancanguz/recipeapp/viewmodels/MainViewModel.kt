@@ -14,6 +14,7 @@ import dagger.hilt.android.internal.Contexts
 import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -44,6 +45,26 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe>? {
+        when {
+            response.message().toString().contains("timeout") -> {
+                return NetworkResult.Error("Timeout")
+            }
+            response.code() == 402 -> {
+                return NetworkResult.Error("API Key Limited.")
+            }
+            response.body()!!.results.isNullOrEmpty() -> {
+                return NetworkResult.Error("Recipes not found.")
+            }
+            response.isSuccessful -> {
+                val foodRecipes = response.body()
+                return NetworkResult.Success(foodRecipes!!)
+            }
+            else -> {
+                return NetworkResult.Error(response.message())
+            }
+        }
+    }
 
     // 1
     private fun hasInternetConnection(): Boolean {
