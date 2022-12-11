@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/recipe_nav"
-    app:startDestination="@id/recipeFragment">
+    app:startDestination="@id/recipesFragment">
 
     <fragment
-        android:id="@+id/recipeFragment"
-        android:name="com.ozancanguz.recipeapp.ui.fragments.recipe.RecipeFragment"
+        android:id="@+id/recipesFragment"
+        android:name="com.ozancanguz.recipeapp.ui.fragments.recipe.Recipes_fragment"
         android:label="Recipes"
-        tools:layout="@layout/fragment_recipe" >
+        tools:layout="@layout/fragment_recipes" >
         <action
             android:id="@+id/action_recipeFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            app:destination="@id/favoriteRecipes" />
         <action
             android:id="@+id/action_recipeFragment_to_foodJokeFragment"
             app:destination="@id/foodJokeFragment" />
@@ -23,8 +23,8 @@
         android:label="FoodJoke"
         tools:layout="@layout/fragment_food_joke" />
     <fragment
-        android:id="@+id/favoriteFragment"
-        android:name="com.ozancanguz.recipeapp.ui.fragments.favorite.FavoriteFragment"
+        android:id="@+id/favoriteRecipes"
+        android:name="com.ozancanguz.recipeapp.ui.fragments.favorite.FavoriteRecipes"
         android:label="Favorites"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite_recipes" />
 </navigation>
