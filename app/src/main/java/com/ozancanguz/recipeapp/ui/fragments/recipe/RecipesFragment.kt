@@ -25,6 +25,7 @@ import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.QUERY_DIET
 import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.QUERY_FILL_INGREDIENTS
 import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.QUERY_NUMBER
 import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.QUERY_TYPE
+import com.ozancanguz.recipeapp.utils.observeOnce
 import com.ozancanguz.recipeapp.viewmodels.MainViewModel
 import com.ozancanguz.recipeapp.viewmodels.RecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -73,7 +74,7 @@ class RecipesFragment : Fragment() {
     //if database is empty we request data from api
     private fun readDatabase() {
         lifecycleScope.launch {
-            mainViewModel.readRecipes.observe(viewLifecycleOwner) { database ->
+            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
                 if (database.isNotEmpty()) {
                     Log.d("RecipesFragment", "readDatabase called!")
                     recipeAdapter.updateData(database[0].foodRecipe)
