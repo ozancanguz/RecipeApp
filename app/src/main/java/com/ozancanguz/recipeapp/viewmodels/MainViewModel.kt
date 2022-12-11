@@ -10,12 +10,18 @@ import androidx.lifecycle.viewModelScope
 import com.ozancanguz.recipeapp.data.Repository
 import com.ozancanguz.recipeapp.data.models.FoodRecipe
 import com.ozancanguz.recipeapp.utils.NetworkResult
+import dagger.hilt.android.internal.Contexts
+import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(repository: Repository,application: Application):AndroidViewModel(application) {
+class MainViewModel @Inject constructor(
+    private val repository: Repository,
+
+    application: Application):AndroidViewModel(application){
 
 
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
@@ -24,6 +30,19 @@ class MainViewModel @Inject constructor(repository: Repository,application: Appl
 
     }
 
+    private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
+        recipesResponse.value = NetworkResult.Loading()
+        if (hasInternetConnection()) {
+            try {
+                val response = repository.remote.getRecipes(queries)
+                recipesResponse.value = handleFoodRecipesResponse(response)
+            } catch (e: Exception) {
+                recipesResponse.value = NetworkResult.Error("Recipes not found.")
+            }
+        } else {
+            recipesResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
+    }
 
 
     // 1
@@ -43,4 +62,11 @@ class MainViewModel @Inject constructor(repository: Repository,application: Appl
 
 
 
-}
+
+
+    }
+
+
+
+
+
