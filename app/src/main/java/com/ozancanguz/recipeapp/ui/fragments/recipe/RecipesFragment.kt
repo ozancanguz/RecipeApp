@@ -9,7 +9,7 @@ import com.ozancanguz.recipeapp.R
 import com.ozancanguz.recipeapp.databinding.FragmentRecipesBinding
 
 
-class Recipes_fragment : Fragment() {
+class RecipesFragment : Fragment() {
     private var _binding: FragmentRecipesBinding? = null
     private val binding get() = _binding!!
 

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/lightMediumGray"
-    tools:context=".ui.fragments.recipe.Recipes_fragment">
+    tools:context=".ui.fragments.recipe.RecipesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
