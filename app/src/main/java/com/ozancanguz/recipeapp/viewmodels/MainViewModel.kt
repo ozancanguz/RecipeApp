@@ -4,15 +4,16 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.ozancanguz.recipeapp.data.Repository
 import com.ozancanguz.recipeapp.data.models.FoodRecipe
+import com.ozancanguz.recipeapp.data.models.db.RecipeDao
+import com.ozancanguz.recipeapp.data.models.db.entities.RecipesEntity
 import com.ozancanguz.recipeapp.utils.NetworkResult
 import dagger.hilt.android.internal.Contexts
 import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
@@ -24,7 +25,24 @@ class MainViewModel @Inject constructor(
 
     application: Application):AndroidViewModel(application){
 
+ // ----------------------------FOR ROOM --------------------------------
 
+    // get all data for room
+    val readRecipes:LiveData<List<RecipesEntity>> = repository.local.readDatabase().asLiveData()
+
+    // insert recipe for viewmodel ref
+
+    private fun insertRecipe(recipesEntity: RecipesEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.insertRecipes(recipesEntity)
+        }
+    }
+
+
+
+
+
+    //       -----------------FOR RETROFİT----------------
     var recipesResponse: MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
 
     fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
