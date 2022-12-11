@@ -9,22 +9,15 @@
         android:id="@+id/recipesFragment"
         android:name="com.ozancanguz.recipeapp.ui.fragments.recipe.Recipes_fragment"
         android:label="Recipes"
-        tools:layout="@layout/fragment_recipes" >
-        <action
-            android:id="@+id/action_recipeFragment_to_favoriteFragment"
-            app:destination="@id/favoriteRecipes" />
-        <action
-            android:id="@+id/action_recipeFragment_to_foodJokeFragment"
-            app:destination="@id/foodJokeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/foodJokeFragment"
-        android:name="com.ozancanguz.recipeapp.ui.fragments.foodjoke.FoodJokeFragment"
-        android:label="FoodJoke"
-        tools:layout="@layout/fragment_food_joke" />
+        tools:layout="@layout/fragment_recipes" />
     <fragment
         android:id="@+id/favoriteRecipes"
         android:name="com.ozancanguz.recipeapp.ui.fragments.favorite.FavoriteRecipes"
-        android:label="Favorites"
+        android:label="fragment_favorite_recipes"
         tools:layout="@layout/fragment_favorite_recipes" />
+    <fragment
+        android:id="@+id/foodJokeFragment"
+        android:name="com.ozancanguz.recipeapp.ui.fragments.foodjoke.FoodJokeFragment"
+        android:label="fragment_food_joke"
+        tools:layout="@layout/fragment_food_joke" />
 </navigation>

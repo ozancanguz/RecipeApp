@@ -2,4 +2,7 @@
     <string name="app_name">RecipeApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favorite">Favorite</string>
+    <string name="food_joke">Food Joke</string>
+    <string name="recipes">Recipes</string>
 </resources>
