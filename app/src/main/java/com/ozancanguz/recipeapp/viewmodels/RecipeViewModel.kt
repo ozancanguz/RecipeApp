@@ -3,7 +3,6 @@ package com.ozancanguz.recipeapp.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.ozancanguz.recipeapp.data.Repository
 import com.ozancanguz.recipeapp.data.datastorerepository.DataStoreRepository
 import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.API_KEY
 import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.DEFAULT_DIET_TYPE

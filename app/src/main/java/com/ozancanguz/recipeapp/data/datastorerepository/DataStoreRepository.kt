@@ -3,8 +3,9 @@ package com.ozancanguz.recipeapp.data.datastorerepository
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.IOException
-
+import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.*
+
 import androidx.datastore.preferences.preferencesDataStore
 
 import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.DEFAULT_DIET_TYPE
@@ -21,10 +22,13 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+private val Context.dataStore by preferencesDataStore(PREFERENCES_NAME)
+
 @ViewModelScoped
 class DataStoreRepository@Inject constructor(@ApplicationContext private val context:Context) {
 
-    val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = PREFERENCES_NAME)
+
+
 
     private object PreferenceKeys{
         val selectedMealType= stringPreferencesKey(PREFERENCES_MEAL_TYPE)
@@ -33,6 +37,8 @@ class DataStoreRepository@Inject constructor(@ApplicationContext private val con
         val selectedDietTypeId= intPreferencesKey(PREFERENCES_DIET_TYPE_ID)
 
     }
+
+    private val dataStore:DataStore<Preferences> = context.dataStore
 
     suspend fun saveMealAndDietType(
         mealType: String,
