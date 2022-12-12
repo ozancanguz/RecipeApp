@@ -20,7 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
+@HiltViewModel
 class RecipeViewModel@Inject constructor(application: Application
 ,private val dataStoreRepository: DataStoreRepository):AndroidViewModel(application) {
 
