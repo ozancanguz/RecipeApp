@@ -3,6 +3,7 @@ package com.ozancanguz.recipeapp.ui.fragments.recipe
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -24,7 +25,7 @@ import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class RecipesFragment : Fragment() {
+class RecipesFragment : Fragment(),SearchView.OnQueryTextListener {
 
     private val args:RecipesFragmentArgs by navArgs()
 
@@ -152,10 +153,21 @@ class RecipesFragment : Fragment() {
     // show menu
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.recipes_search_menu,menu)
-        super.onCreateOptionsMenu(menu, inflater)
+
+        val search = menu.findItem(R.id.menu_search)
+        val searchView = search.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+
 
     }
+    override fun onQueryTextSubmit(p0: String?): Boolean {
+        return true
+    }
 
+    override fun onQueryTextChange(p0: String?): Boolean {
+        return true
+    }
 
 
 
