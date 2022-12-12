@@ -2,10 +2,8 @@ package com.ozancanguz.recipeapp.ui.fragments.recipe
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ozancanguz.recipeapp.R
 import com.ozancanguz.recipeapp.adapter.RecipeAdapter
 import com.ozancanguz.recipeapp.databinding.FragmentRecipesBinding
+import com.ozancanguz.recipeapp.utils.NetworkListener
 import com.ozancanguz.recipeapp.utils.NetworkResult
 import com.ozancanguz.recipeapp.utils.observeOnce
 import com.ozancanguz.recipeapp.viewmodels.MainViewModel
@@ -39,6 +38,9 @@ class RecipesFragment : Fragment() {
     // init adapter
     private var recipeAdapter=RecipeAdapter()
 
+    // network listeer for internet connection
+    private lateinit var networkListener: NetworkListener
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +49,10 @@ class RecipesFragment : Fragment() {
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        // set menu
+        //for menu
+        setHasOptionsMenu(true)
+
         // init rv
         initRv()
 
@@ -54,6 +60,19 @@ class RecipesFragment : Fragment() {
        // observeLiveData()
         // for observelivedata fun we read from database
         readDatabase()
+
+        //network listener // if there is no internet it logs false
+        lifecycleScope.launch{
+            networkListener= NetworkListener()
+            networkListener.checkNetworkAvailability(requireContext())
+                .collect{status ->
+                    Log.d("networkListener",status.toString())
+                    recipeViewModel.showNetworkStatus()
+                }
+
+        }
+
+
 
         binding.floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
@@ -129,6 +148,15 @@ class RecipesFragment : Fragment() {
             }
         }
     }
+
+    // show menu
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.recipes_search_menu,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+
+    }
+
+
 
 
 

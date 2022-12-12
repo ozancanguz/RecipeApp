@@ -1,6 +1,7 @@
 package com.ozancanguz.recipeapp.viewmodels
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.ozancanguz.recipeapp.data.datastorerepository.DataStoreRepository
@@ -22,6 +23,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipeViewModel@Inject constructor(application: Application
 ,private val dataStoreRepository: DataStoreRepository):AndroidViewModel(application) {
+
+    private var networkStatus=false
 
     private var mealType = DEFAULT_MEAL_TYPE
     private var dietType = DEFAULT_DIET_TYPE
@@ -51,6 +54,12 @@ class RecipeViewModel@Inject constructor(application: Application
         queries[QUERY_FILL_INGREDIENTS] = "true"
 
         return queries
+    }
+    fun showNetworkStatus(){
+        if(!networkStatus){
+            Toast.makeText(getApplication()," ", Toast.LENGTH_LONG).show()
+        }
+
     }
 
 }
