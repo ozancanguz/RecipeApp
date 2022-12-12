@@ -35,7 +35,7 @@ class Constants {
         const val QUERY_SEARCH="query"
 
         const val BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/"
-
+        const val FAVORITERECIPES_TABLE="favorite_recipes_table"
     }
 
 }

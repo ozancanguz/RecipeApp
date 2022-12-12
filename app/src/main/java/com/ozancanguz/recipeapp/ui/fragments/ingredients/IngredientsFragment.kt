@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ozancanguz.recipeapp.R
 import com.ozancanguz.recipeapp.adapter.IngredientsAdapter
 import com.ozancanguz.recipeapp.data.models.Result
 import com.ozancanguz.recipeapp.databinding.FragmentIngredientsBinding
-import kotlinx.android.synthetic.main.fragment_ingredients.view.*
 
 
 class IngredientsFragment : Fragment() {
