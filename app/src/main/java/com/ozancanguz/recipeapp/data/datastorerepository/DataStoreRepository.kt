@@ -3,10 +3,10 @@ package com.ozancanguz.recipeapp.data.datastorerepository
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.IOException
-import androidx.datastore.dataStore
+
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.datastore.preferences.preferencesDataStoreFile
+
 import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.DEFAULT_DIET_TYPE
 import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.DEFAULT_MEAL_TYPE
 import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.PREFERENCES_DIET_TYPE
@@ -15,7 +15,6 @@ import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.PREFERENCES_
 import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.PREFERENCES_MEAL_TYPE_ID
 import com.ozancanguz.recipeapp.utils.constants.Constants.Companion.PREFERENCES_NAME
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ActivityRetainedScoped
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
