@@ -32,6 +32,8 @@ class Constants {
         const val RECIPES_TABLE="recipes_table"
         const val DATABASE_NAME="recipes_database"
 
+        const val QUERY_SEARCH="query"
+
     }
 
 }
