@@ -2,6 +2,7 @@ package com.ozancanguz.recipeapp.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
@@ -18,7 +19,6 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
-
 
 
         val fragments=ArrayList<Fragment>()
@@ -53,4 +53,12 @@ class DetailsActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+          menuInflater.inflate(R.menu.details_menu,menu)
+
+        return true
+    }
+
+
 }
