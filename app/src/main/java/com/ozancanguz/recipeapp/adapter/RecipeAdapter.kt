@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 
 import androidx.recyclerview.widget.RecyclerView
 import com.ozancanguz.recipeapp.R
 import com.ozancanguz.recipeapp.data.models.FoodRecipe
 import com.ozancanguz.recipeapp.data.models.Result
+import com.ozancanguz.recipeapp.ui.fragments.recipe.RecipesFragmentDirections
 import com.ozancanguz.recipeapp.utils.util.Companion.loadImage
 import kotlinx.android.synthetic.main.recipes_row_layout.view.*
 
@@ -49,6 +51,13 @@ class RecipeAdapter:RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
         holder.itemView.leaf_imageView
             .setBackgroundColor(ContextCompat.getColor(holder.itemView.context
             ,R.color.customColor))
+
+
+        // result arg
+        holder.itemView.setOnClickListener {
+            val action=RecipesFragmentDirections.actionRecipesFragmentToDetailsActivity(currentItem)
+            holder.itemView.findNavController().navigate(action)
+        }
 
     }
 

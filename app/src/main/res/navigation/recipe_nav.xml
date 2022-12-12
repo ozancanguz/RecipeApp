@@ -23,6 +23,9 @@
             android:name="back"
             app:argType="boolean"
             android:defaultValue="true" />
+        <action
+            android:id="@+id/action_recipesFragment_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
     </fragment>
     <fragment
         android:id="@+id/foodJokeFragment"
@@ -43,4 +46,13 @@
             android:id="@+id/action_recipesBottomSheet_to_recipesFragment"
             app:destination="@id/recipesFragment" />
     </dialog>
+    <activity
+        android:id="@+id/detailsActivity"
+        android:name="com.ozancanguz.recipeapp.ui.activities.DetailsActivity"
+        android:label="activity_details"
+        tools:layout="@layout/activity_details" >
+        <argument
+            android:name="result"
+            app:argType="com.ozancanguz.recipeapp.data.models.Result" />
+    </activity>
 </navigation>
