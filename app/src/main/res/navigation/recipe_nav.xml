@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_recipeFragment_to_foodJokeFragment"
             app:destination="@id/foodJokeFragment" />
+        <action
+            android:id="@+id/action_recipesFragment_to_recipesBottomSheet"
+            app:destination="@id/recipesBottomSheet" />
     </fragment>
     <fragment
         android:id="@+id/foodJokeFragment"
@@ -27,4 +30,13 @@
         android:name="com.ozancanguz.recipeapp.ui.fragments.favorite.FavoriteRecipes"
         android:label="Favorites"
         tools:layout="@layout/fragment_favorite_recipes" />
+    <dialog
+        android:id="@+id/recipesBottomSheet"
+        android:name="com.ozancanguz.recipeapp.ui.fragments.recipe.bottomsheet.RecipesBottomSheet"
+        android:label="recipes_bottom_sheet"
+        tools:layout="@layout/recipes_bottom_sheet" >
+        <action
+            android:id="@+id/action_recipesBottomSheet_to_recipesFragment"
+            app:destination="@id/recipesFragment" />
+    </dialog>
 </navigation>

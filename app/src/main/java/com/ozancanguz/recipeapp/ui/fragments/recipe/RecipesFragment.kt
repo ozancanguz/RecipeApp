@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ozancanguz.recipeapp.R
 import com.ozancanguz.recipeapp.adapter.RecipeAdapter
 import com.ozancanguz.recipeapp.databinding.FragmentRecipesBinding
 import com.ozancanguz.recipeapp.utils.NetworkResult
@@ -49,6 +51,9 @@ class RecipesFragment : Fragment() {
         // for observelivedata fun we read from database
         readDatabase()
 
+        binding.floatingActionButton.setOnClickListener {
+            findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+        }
 
 
     return view
@@ -57,6 +62,8 @@ class RecipesFragment : Fragment() {
         binding.recyclerview.layoutManager=LinearLayoutManager(requireContext())
         binding.recyclerview.adapter=recipeAdapter
     }
+
+
 
     // firs we listed from database if database is not empty .
     //if database is empty we request data from api
