@@ -34,6 +34,8 @@ class Constants {
 
         const val QUERY_SEARCH="query"
 
+        const val BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/"
+
     }
 
 }
