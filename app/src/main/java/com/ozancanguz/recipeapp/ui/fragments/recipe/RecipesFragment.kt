@@ -62,7 +62,7 @@ class RecipesFragment : Fragment() {
     //if database is empty we request data from api
     private fun readDatabase() {
 
-        Log.d("RecipesFragment","readDatabase called")
+
         lifecycleScope.launch {
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
                 if (database.isNotEmpty()) {
