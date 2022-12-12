@@ -8,6 +8,7 @@ import androidx.lifecycle.*
 import com.ozancanguz.recipeapp.data.Repository
 import com.ozancanguz.recipeapp.data.models.FoodRecipe
 import com.ozancanguz.recipeapp.data.models.db.RecipeDao
+import com.ozancanguz.recipeapp.data.models.db.entities.FavoriteEntity
 import com.ozancanguz.recipeapp.data.models.db.entities.RecipesEntity
 import com.ozancanguz.recipeapp.utils.NetworkResult
 import dagger.hilt.android.internal.Contexts
@@ -29,6 +30,7 @@ class MainViewModel @Inject constructor(
 
     // get all data for room
     val readRecipes:LiveData<List<RecipesEntity>> = repository.local.readDatabase().asLiveData()
+    val readFavoriteRecipes:LiveData<List<FavoriteEntity>> = repository.local.readFavoriteRecipes().asLiveData()
 
     // insert recipe for viewmodel ref
 
@@ -37,6 +39,24 @@ class MainViewModel @Inject constructor(
             repository.local.insertRecipes(recipesEntity)
         }
     }
+    private fun insertFavoriteRecipe(favoriteEntity: FavoriteEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.insertFavoriteRecipes(favoriteEntity)
+        }
+    }
+
+    private fun deleteFavoriteRecipe(favoriteEntity: FavoriteEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.deleteFavoriteRecipe(favoriteEntity)
+        }
+    }
+
+    private fun DeleteAllFavoriteRecipes(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.deleteAllFavoriteRecipes()
+        }
+    }
+
 
 
 
