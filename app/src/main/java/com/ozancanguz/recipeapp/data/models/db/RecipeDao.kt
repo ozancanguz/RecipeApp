@@ -30,11 +30,14 @@ interface RecipeDao {
 
     // delete single favorite recipe
     @Delete
-    suspend fun deleteFavoriteRecipe(favoritesEntity: FavoriteRecipes)
+    suspend fun deleteFavoriteRecipe(favoriteEntity: FavoriteEntity)
 
     // delete all fav recipe
     @Query("DELETE FROM favorite_recipes_table")
     suspend fun deleteAllFavoriteRecipes()
+
+
+
 
 
 
