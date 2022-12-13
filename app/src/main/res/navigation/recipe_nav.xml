@@ -36,7 +36,11 @@
         android:id="@+id/favoriteRecipes"
         android:name="com.ozancanguz.recipeapp.ui.fragments.favorite.FavoriteRecipes"
         android:label="Favorites"
-        tools:layout="@layout/fragment_favorite_recipes" />
+        tools:layout="@layout/fragment_favorite_recipes" >
+        <action
+            android:id="@+id/action_favoriteRecipes_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
+    </fragment>
     <dialog
         android:id="@+id/recipesBottomSheet"
         android:name="com.ozancanguz.recipeapp.ui.fragments.recipe.bottomsheet.RecipesBottomSheet"

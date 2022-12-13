@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ozancanguz.recipeapp.R
 
 import com.ozancanguz.recipeapp.data.models.db.entities.FavoriteEntity
+import com.ozancanguz.recipeapp.ui.fragments.favorite.FavoriteRecipesDirections
 import com.ozancanguz.recipeapp.utils.util.Companion.loadImage
 import kotlinx.android.synthetic.main.favorite_recipes_row_layout.view.*
 
@@ -44,6 +46,11 @@ class FavoritesRecipesAdapter:RecyclerView.Adapter<FavoritesRecipesAdapter.FavVi
             .setBackgroundColor(
                 ContextCompat.getColor(holder.itemView.context
                 ,R.color.customColor))
+
+        holder.itemView.favoritereciperowLayout.setOnClickListener {
+            val action=FavoriteRecipesDirections.actionFavoriteRecipesToDetailsActivity(currentFav.result)
+            holder.itemView.findNavController().navigate(action)
+        }
 
 
 
