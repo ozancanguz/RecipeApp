@@ -1,7 +1,10 @@
 package com.ozancanguz.recipeapp.data.local
 
+import androidx.room.Insert
+import com.ozancanguz.recipeapp.data.models.FoodJoke
 import com.ozancanguz.recipeapp.data.models.db.RecipeDao
 import com.ozancanguz.recipeapp.data.models.db.entities.FavoriteEntity
+import com.ozancanguz.recipeapp.data.models.db.entities.FoodJokeEntity
 import com.ozancanguz.recipeapp.data.models.db.entities.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -38,6 +41,17 @@ class LocalDataSource@Inject constructor(private val recipeDao: RecipeDao){
     suspend fun deleteAllFavoriteRecipes() {
         recipeDao.deleteAllFavoriteRecipes()
     }
+
+    // list food joke
+    fun readAllJokes():Flow<List<FoodJokeEntity>>{
+      return  recipeDao.readAllFoodJoke()
+    }
+
+    // insert food joke
+    @Insert()
+   suspend fun insertFoodJoke(foodJokeEntity: FoodJokeEntity){
+       recipeDao.insertFoodJoke(foodJokeEntity)
+   }
 
 
 }

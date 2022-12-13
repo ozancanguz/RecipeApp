@@ -46,7 +46,7 @@ interface RecipeDao {
     // list all food jokes
 
     @Query("select * from food_joke_table order by id asc")
-    fun readAllFoodJoke():Flow<List<FoodJoke>>
+    fun readAllFoodJoke():Flow<List<FoodJokeEntity>>
 
 
 
