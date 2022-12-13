@@ -106,24 +106,20 @@ class MainViewModel @Inject constructor(
         if (hasInternetConnection()) {
             try {
                 val response = repository.remote.getFoodJoke(apiKey)
-                foodjokeresponse.value=handleFoodJokeResponse(response)
+                foodjokeresponse.value = handleFoodJokesResponse(response)
 
-                // for offline cache food joke
-                val foodJoke = foodjokeresponse.value!!.data
-                if(foodJoke != null) {
+                val foodJoke=foodjokeresponse.value!!.data
+                if(foodJoke!=null){
                     offlineCacheFoodJoke(foodJoke)
-
                 }
-
             } catch (e: Exception) {
-                recipesResponse.value = NetworkResult.Error("Recipes not found.")
+                foodjokeresponse.value = NetworkResult.Error("Recipes not found.")
             }
         } else {
-            recipesResponse.value = NetworkResult.Error("No Internet Connection.")
+            foodjokeresponse.value = NetworkResult.Error("No Internet Connection.")
         }
 
     }
-
 
     private suspend fun getRecipesSafeCall(queries: Map<String, String>) {
         recipesResponse.value = NetworkResult.Loading()
@@ -195,7 +191,7 @@ class MainViewModel @Inject constructor(
             }
         }
     }
-    private fun handleFoodJokeResponse(response: Response<FoodJoke>): NetworkResult<FoodJoke>? {
+    private fun handleFoodJokesResponse(response: Response<FoodJoke>): NetworkResult<FoodJoke>? {
         when {
             response.message().toString().contains("timeout") -> {
                 return NetworkResult.Error("Timeout")
@@ -203,17 +199,17 @@ class MainViewModel @Inject constructor(
             response.code() == 402 -> {
                 return NetworkResult.Error("API Key Limited.")
             }
-
-
             response.isSuccessful -> {
-                val foodJoke = response.body()
-                return NetworkResult.Success(foodJoke!!)
+                val FoodJoke = response.body()
+                return NetworkResult.Success(FoodJoke!!)
             }
             else -> {
                 return NetworkResult.Error(response.message())
             }
         }
     }
+
+
 
     // 1
     private fun hasInternetConnection(): Boolean {
