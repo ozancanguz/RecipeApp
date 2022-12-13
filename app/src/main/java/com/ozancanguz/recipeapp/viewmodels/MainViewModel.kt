@@ -94,6 +94,7 @@ class MainViewModel @Inject constructor(
         if (hasInternetConnection()) {
             try {
                 val response = repository.remote.getFoodJoke(apiKey)
+                foodjokeresponse.value=handleFoodJokeResponse(response)
 
                 // for offline cache part 1
                 val foodRecipe = foodjokeresponse.value!!.data
@@ -169,6 +170,25 @@ class MainViewModel @Inject constructor(
             response.isSuccessful -> {
                 val foodRecipes = response.body()
                 return NetworkResult.Success(foodRecipes!!)
+            }
+            else -> {
+                return NetworkResult.Error(response.message())
+            }
+        }
+    }
+    private fun handleFoodJokeResponse(response: Response<FoodJoke>): NetworkResult<FoodJoke>? {
+        when {
+            response.message().toString().contains("timeout") -> {
+                return NetworkResult.Error("Timeout")
+            }
+            response.code() == 402 -> {
+                return NetworkResult.Error("API Key Limited.")
+            }
+
+
+            response.isSuccessful -> {
+                val foodJoke = response.body()
+                return NetworkResult.Success(foodJoke!!)
             }
             else -> {
                 return NetworkResult.Error(response.message())
