@@ -35,8 +35,8 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-
                 android:text="/lorem_ipsum"
+                android:fontFamily="@font/lobster"
                 android:textColor="@color/dark"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
