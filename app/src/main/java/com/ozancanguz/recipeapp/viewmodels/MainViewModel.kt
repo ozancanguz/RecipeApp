@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.*
 import com.ozancanguz.recipeapp.data.Repository
+import com.ozancanguz.recipeapp.data.models.FoodJoke
 import com.ozancanguz.recipeapp.data.models.FoodRecipe
 import com.ozancanguz.recipeapp.data.models.db.RecipeDao
 import com.ozancanguz.recipeapp.data.models.db.entities.FavoriteEntity
@@ -70,6 +71,9 @@ class MainViewModel @Inject constructor(
     var searchedRecipesResponse:MutableLiveData<NetworkResult<FoodRecipe>> = MutableLiveData()
 
 
+    // get all food joke
+    var foodjokeresponse:MutableLiveData<NetworkResult<FoodJoke>> = MutableLiveData()
+
     // get recipes in background thread
     fun getRecipes(queries: Map<String, String>) = viewModelScope.launch {
           getRecipesSafeCall(queries)
@@ -78,6 +82,32 @@ class MainViewModel @Inject constructor(
     // search recipes in background thread
     fun searchRecipes(searchQuery:Map<String,String>) = viewModelScope.launch {
         searchRecipesSafeCall(searchQuery)
+    }
+
+    // get all foodjoke
+    fun getAllFoodJoke(apiKey:String)=viewModelScope.launch {
+        getFoodJokeSafeCall(apiKey)
+    }
+
+    private suspend fun getFoodJokeSafeCall(apiKey: String) {
+        foodjokeresponse.value = NetworkResult.Loading()
+        if (hasInternetConnection()) {
+            try {
+                val response = repository.remote.getFoodJoke(apiKey)
+
+                // for offline cache part 1
+                val foodRecipe = foodjokeresponse.value!!.data
+                if(foodRecipe != null) {
+
+                }
+
+            } catch (e: Exception) {
+                recipesResponse.value = NetworkResult.Error("Recipes not found.")
+            }
+        } else {
+            recipesResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
+
     }
 
 
