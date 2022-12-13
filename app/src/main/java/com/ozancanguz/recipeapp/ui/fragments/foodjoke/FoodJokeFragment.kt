@@ -21,8 +21,14 @@ class FoodJokeFragment : Fragment() {
         val view = binding.root
 
 
+
+
+
+
         return view
     }
+
+
 
 
 }
