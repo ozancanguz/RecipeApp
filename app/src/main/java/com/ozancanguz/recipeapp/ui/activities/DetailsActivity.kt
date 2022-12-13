@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.ozancanguz.recipeapp.R
 import com.ozancanguz.recipeapp.adapter.PagerAdapter
 import com.ozancanguz.recipeapp.data.models.db.entities.FavoriteEntity
@@ -17,7 +19,7 @@ import com.ozancanguz.recipeapp.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_details.*
 
-
+@AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
     private val args by navArgs<DetailsActivityArgs>()
     private val mainViewModel:MainViewModel by viewModels()
@@ -67,7 +69,21 @@ class DetailsActivity : AppCompatActivity() {
         var favoriteEntity=FavoriteEntity(0,args.result)
         mainViewModel.insertFavoriteRecipe(favoriteEntity)
 
+        // change star icon color
+      changeMenuItemColor(item,R.color.yellow)
+      showSnackBar("Recipe saved")
 
+    }
+
+    private fun changeMenuItemColor(item: MenuItem, color: Int) {
+        item.icon?.setTint(ContextCompat.getColor(this,color))
+    }
+
+    private fun showSnackBar(msg: String) {
+
+        Snackbar.make(detailsLayout,"Recipe saved" ,Snackbar.LENGTH_LONG)
+            .setAction("OK"){}
+            .show()
 
 
     }
