@@ -2,7 +2,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/foodcolor"
+    android:background="@drawable/img_4"
     tools:context=".ui.fragments.foodjoke.FoodJokeFragment"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
