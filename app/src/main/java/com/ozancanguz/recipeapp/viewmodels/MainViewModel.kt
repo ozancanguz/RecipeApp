@@ -10,6 +10,7 @@ import com.ozancanguz.recipeapp.data.models.FoodJoke
 import com.ozancanguz.recipeapp.data.models.FoodRecipe
 import com.ozancanguz.recipeapp.data.models.db.RecipeDao
 import com.ozancanguz.recipeapp.data.models.db.entities.FavoriteEntity
+import com.ozancanguz.recipeapp.data.models.db.entities.FoodJokeEntity
 import com.ozancanguz.recipeapp.data.models.db.entities.RecipesEntity
 import com.ozancanguz.recipeapp.utils.NetworkResult
 import dagger.hilt.android.internal.Contexts
@@ -32,6 +33,8 @@ class MainViewModel @Inject constructor(
     // get all data for room
     val readRecipes:LiveData<List<RecipesEntity>> = repository.local.readDatabase().asLiveData()
     val readFavoriteRecipes:LiveData<List<FavoriteEntity>> = repository.local.readFavoriteRecipes().asLiveData()
+     val readFoodJoke:LiveData<List<FoodJokeEntity>> = repository.local.readAllJokes().asLiveData()
+
 
     // insert recipe for viewmodel ref
 
@@ -55,6 +58,15 @@ class MainViewModel @Inject constructor(
     fun deleteAllFavoriteRecipes(){
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.deleteAllFavoriteRecipes()
+        }
+    }
+
+
+    // insert food joke
+
+    fun insertFoodJoke(foodJokeEntity: FoodJokeEntity){
+        viewModelScope.launch {
+            repository.local.insertFoodJoke(foodJokeEntity)
         }
     }
 
