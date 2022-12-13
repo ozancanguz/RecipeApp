@@ -2,11 +2,13 @@ package com.ozancanguz.recipeapp.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.ozancanguz.recipeapp.R
@@ -90,8 +92,30 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu,menu)
+        // check saved recipe fun
+        val menuItem=menu?.findItem(R.id.savetofavmenu)
+        checkSavedRecipe(menuItem!!)
+
         return true
 
+
+    }
+
+    // this fun checks if recipe save or not
+    private fun checkSavedRecipe(menuItem: MenuItem) {
+        mainViewModel.readFavoriteRecipes.observe(this,
+        Observer { favoritesEntity ->
+            try {
+                for(savedRecipe in favoritesEntity){
+                    if(savedRecipe.result.id==args.result.id){
+                        changeMenuItemColor(menuItem,R.color.yellow)
+                    }
+                }
+            }catch (e:Exception){
+                Log.d("detailsactivity " ,e.message.toString())
+            }
+
+        })
 
     }
 
