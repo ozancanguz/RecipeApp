@@ -1,7 +1,9 @@
 package com.ozancanguz.recipeapp.data.models.db
 
 import androidx.room.*
+import com.ozancanguz.recipeapp.data.models.FoodJoke
 import com.ozancanguz.recipeapp.data.models.db.entities.FavoriteEntity
+import com.ozancanguz.recipeapp.data.models.db.entities.FoodJokeEntity
 import com.ozancanguz.recipeapp.data.models.db.entities.RecipesEntity
 import com.ozancanguz.recipeapp.ui.fragments.favorite.FavoriteRecipes
 import kotlinx.coroutines.flow.Flow
@@ -35,6 +37,17 @@ interface RecipeDao {
     // delete all fav recipe
     @Query("DELETE FROM favorite_recipes_table")
     suspend fun deleteAllFavoriteRecipes()
+
+    // inserting food joke to db
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertFoodJoke(foodJokeEntity: FoodJokeEntity)
+
+    // list all food jokes
+
+    @Query("select * from food_joke_table order by id asc")
+    fun readAllFoodJoke():Flow<List<FoodJoke>>
+
 
 
 
