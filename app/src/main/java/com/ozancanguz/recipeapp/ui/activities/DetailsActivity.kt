@@ -26,6 +26,10 @@ class DetailsActivity : AppCompatActivity() {
     private val args by navArgs<DetailsActivityArgs>()
     private val mainViewModel:MainViewModel by viewModels()
 
+    private var recipeSaved=false
+    private var savedRecipeId=0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -61,10 +65,25 @@ class DetailsActivity : AppCompatActivity() {
         if (item.itemId == android.R.id.home) {
             finish()
             // save to favorites
-        }else if(item.itemId ==R.id.savetofavmenu){
+        }else if(item.itemId ==R.id.savetofavmenu&&!recipeSaved){
             savetoFavorites(item)
+        }else if (item.itemId == R.id.savetofavmenu&& recipeSaved) {
+            removeFromFavorites(item)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun removeFromFavorites(item: MenuItem) {
+        val favoritesEntity =
+            FavoriteEntity(
+                savedRecipeId,
+                args.result
+            )
+        mainViewModel.deleteFavoriteRecipe(favoritesEntity)
+        changeMenuItemColor(item, R.color.white)
+
+       showSnackBar("removed from favorites")
+        recipeSaved = false
     }
 
     private fun savetoFavorites(item: MenuItem) {
@@ -74,7 +93,7 @@ class DetailsActivity : AppCompatActivity() {
         // change star icon color
       changeMenuItemColor(item,R.color.yellow)
       showSnackBar("Recipe saved")
-
+        recipeSaved=true
     }
 
     private fun changeMenuItemColor(item: MenuItem, color: Int) {
@@ -109,6 +128,8 @@ class DetailsActivity : AppCompatActivity() {
                 for(savedRecipe in favoritesEntity){
                     if(savedRecipe.result.id==args.result.id){
                         changeMenuItemColor(menuItem,R.color.yellow)
+                        savedRecipeId=savedRecipe.id
+                        recipeSaved = true
                     }
                 }
             }catch (e:Exception){
