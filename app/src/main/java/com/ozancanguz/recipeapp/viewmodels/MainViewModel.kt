@@ -108,9 +108,10 @@ class MainViewModel @Inject constructor(
                 val response = repository.remote.getFoodJoke(apiKey)
                 foodjokeresponse.value=handleFoodJokeResponse(response)
 
-                // for offline cache part 1
-                val foodRecipe = foodjokeresponse.value!!.data
-                if(foodRecipe != null) {
+                // for offline cache food joke
+                val foodJoke = foodjokeresponse.value!!.data
+                if(foodJoke != null) {
+                    offlineCacheFoodJoke(foodJoke)
 
                 }
 
@@ -164,9 +165,15 @@ class MainViewModel @Inject constructor(
     private fun offlineCacheRecipes(foodRecipe: FoodRecipe) {
         val recipesEntity = RecipesEntity(foodRecipe)
         insertRecipe(recipesEntity)
+    }
 
+    // we offline cache food joke the data and insert
+    private fun offlineCacheFoodJoke(foodJoke: FoodJoke) {
+        val foodJokeEntity = FoodJokeEntity(foodJoke)
+        insertFoodJoke(foodJokeEntity)
 
     }
+
 
     private fun handleFoodRecipesResponse(response: Response<FoodRecipe>): NetworkResult<FoodRecipe>? {
         when {
@@ -222,6 +229,7 @@ class MainViewModel @Inject constructor(
             else -> false
         }
     }
+
 
 
 
