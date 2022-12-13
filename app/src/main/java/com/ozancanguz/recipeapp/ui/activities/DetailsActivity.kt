@@ -11,7 +11,9 @@ import com.ozancanguz.recipeapp.adapter.PagerAdapter
 import com.ozancanguz.recipeapp.ui.fragments.ingredients.IngredientsFragment
 import com.ozancanguz.recipeapp.ui.fragments.instructions.InstructionsFragment
 import com.ozancanguz.recipeapp.ui.fragments.overview.OverviewFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_details.*
+
 
 class DetailsActivity : AppCompatActivity() {
     private val args by navArgs<DetailsActivityArgs>()
@@ -55,9 +57,10 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-          menuInflater.inflate(R.menu.details_menu,menu)
-
+        menuInflater.inflate(R.menu.details_menu,menu)
         return true
+
+
     }
 
 
