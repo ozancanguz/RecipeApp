@@ -20,3 +20,10 @@ last updated technologies in android mobile app world.
 **Arhictecture:**
 
 - MVVM
+
+                                           ---HERE IS DEMO OF THE PROJECT---
+
+![RECİPE APP](https://user-images.githubusercontent.com/64928807/207524527-86863a83-29e4-4da6-bb61-a538523862f2.PNG)
+
+![recipe app v1](https://user-images.githubusercontent.com/64928807/207524555-983cb53b-9a82-4b38-beb7-ba2f3aebca47.gif)
+
