@@ -53,9 +53,6 @@ This package include utility class that has glide image loading etc.
 - RESTApi
 - LottieAnimationView
 
-**Arhictecture:**
-
-- MVVM
 
                                          
 
